@@ -1,0 +1,7 @@
+[Unit]
+Description=SteamBuntu Autorepair
+
+[Service]
+ExecStart=/usr/bin/steambuntu-autorepair
+Type=oneshot
+

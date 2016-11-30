@@ -1,0 +1,19 @@
+#! /bin/sh
+
+echo $$ > /tmp/steambuntu-update.pid
+
+# attempt to clean up any half-installed packages (unpacked but failed to configure,
+# possibly because it was upgraded during shutdown)
+apt-get install
+
+apt-get update -y -q
+unattended-upgrade
+
+# signal steam to refresh its inbox if we need a reboot
+if [ -f /var/run/reboot-required ] && [ "`pidof -s steam`" != '' ] ; then
+	STEAMPID=`pidof -s steam`
+	STEAMUSER=`ps -p $STEAMPID -o user=`
+	su $STEAMUSER -c steam steam://refreshinbox
+fi
+
+rm /tmp/steambuntu-update.pid

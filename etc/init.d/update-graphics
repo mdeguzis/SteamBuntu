@@ -1,0 +1,74 @@
+#! /bin/bash
+### BEGIN INIT INFO
+# Provides:         update-graphics
+# Required-Start:   $remote_fs $syslog
+# Required-Stop:
+# Default-Start:    2 3 4 5
+# Default-Stop:     0 1 6
+# Short-Description: Update Graphics
+# Description:       Update the graphics stack to use based on the installed hardware
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/bin:/usr/sbin
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+do_start () {
+
+ udev_is_boot_vga i915
+ intel_primary=$?
+
+ if [[ -n $(lspci | grep VGA | grep NVIDIA) ]]; then
+  alternative=nvidia
+ elif [[ -n $(lspci | grep VGA | grep ATI) ]]; then
+  CARD=`lspci | grep VGA | sed -n 's/.*\[AMD\/ATI\] \([^ ]*\) .*/\1/p'`
+  AMDGPU_PRO_SUPPORT_CARDS="Bonaire"
+  if [[ (-n $(echo $AMDGPU_PRO_SUPPORT_CARDS | grep $CARD)) && (-d /usr/lib/x86_64-linux-gnu/amdgpu-pro) ]]; then
+    alternative=x86_64-linux-gnu/amdgpu-pro
+  else
+    alternative=fglrx
+  fi
+ else
+  alternative=mesa-diverted
+ fi
+
+ # even if a discrete GPU is detected, chose the mesa stack for hybrid configs
+ if [[ $intel_primary -eq 0 ]]; then
+  alternative=mesa-diverted
+ fi
+
+ update-alternatives --set glx /usr/lib/$alternative
+
+ ldconfig
+
+ return 0
+}
+
+do_status () {
+ return 0
+}
+
+case "$1" in
+  start|"")
+ do_start
+ ;;
+  restart|reload|force-reload)
+ echo "Error: argument '$1' not supported" >&2
+ exit 3
+ ;;
+  stop)
+ # No-op
+ ;;
+  status)
+ do_status
+ exit $?
+ ;;
+  *)
+ echo "Usage: update-graphics.sh" >&2
+ exit 3
+ ;;
+esac
+
+:
+
