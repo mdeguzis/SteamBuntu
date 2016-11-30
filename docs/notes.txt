@@ -36,3 +36,24 @@
  # Auto selection session
  # Driver repos
  # Non-steam game shorcut written in Zentiy/something to update from BPM manually?
+
+#####################################
+# Step 4:
+# Add extra elements 
+#####################################
+
+# Add components to mimic SteamOS (update flag in SteamOS session etc.).
+https://github.com/ProfessorKaos64/SteamOS-Tools/wiki/Unattended-Upgrades
+https://github.com/Jimdo/unattended-upgrades/blob/master/unattended-upgrade
+
+# SteamOS update
+https://gist.github.com/ProfessorKaos64/f213ff5244b372566df06b1e94b6fe2c
+
+# /usr/bin/steamos-autorepair
+https://gist.github.com/ProfessorKaos64/4e53f81c82b69f5562eae510f65c85bc
+
+# /lib/systemd/system/steamos-autorepair.service
+https://gist.github.com/ProfessorKaos64/db9df72b6f7f72cb65ce178dda192261
+
+# /etc/init.d/update-graphics
+https://gist.github.com/ProfessorKaos64/cf7fa5e2cf510540e29760b79c167052
