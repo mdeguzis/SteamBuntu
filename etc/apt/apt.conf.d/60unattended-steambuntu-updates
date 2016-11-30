@@ -37,9 +37,7 @@ APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "5";
 // Automatically upgrade packages from these (origin:archive) pairs
 Unattended-Upgrade::Origins-Pattern {
-        "origin=steamos-tools,label=Custom SteamOS-Tools Debian Repository";
-        "origin=steamos-tools,label=Custom SteamOS-Tools Debian Repository (testing)";
-        "origin=Debian,label=Debian";
+        "origin=Ubuntu,label=Ubuntu";
         //"origin=Debian Backports,label=Debian Backports";
 };
 Unattended-Upgrade::InstallOnShutdown "true";
@@ -153,8 +151,3 @@ DPkg::Pre-Invoke {
 Dpkg::Options {
    "--force-confnew";
 }
-
-##########################################
-# Additional reading and information
-##########################################
-# See: https://github.com/ProfessorKaos64/SteamOS-Tools/wiki/Unattended-Upgrades
