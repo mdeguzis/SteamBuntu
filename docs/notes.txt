@@ -1,0 +1,38 @@
+
+#####################################
+# Step 1:
+# Slim down Ubuntu:
+#####################################
+
+# See: https://help.ubuntu.com/community/Diet%20Ubuntu
+
+ sudo apt-get remove --purge brltty brltty-x11 contact-lookup-applet diveintopython \
+ espeak espeak-data evolution-common evolution-data-server evolution-exchange \
+ evolution-plugins evolution-webcal example-content fortune-mod gnome-accessibility-themes \
+ gnome-cards-data gnome-games gnome-games-data gnome-mag gnome-orca libbeagle1 libespeak1 \
+ libgnome-mag2 libgnome-speech7 libgtk-vnc-1 0-0 mono-common openoffice org-base-core \
+ openoffice org-calc openoffice org-draw openoffice org-impress openoffice org-writer \
+ ppp pppconfig pppoeconf rhythmbox totem totem-common totem-gstreamer totem-mozilla \
+ totem-plugins transmission-common transmission-gtk ttf-arabeyes ttf-arphic-uming \
+ ttf-indic-fonts-core ttf-kochi-gothic ttf-kochi-mincho ttf-lao ttf-malayalam-fonts \
+ ttf-thai-tlwg ttf-unfonts-core vinagre vino wvdial
+ 
+ # clean apt-cache
+ 
+ sudo apt-get autoremove && sudo apt-get clean all && sudo apt-get autoclean all
+ 
+ 
+#####################################
+# Step 2:
+# Install PPA packages to provide SteamOS functionality
+#####################################
+
+#####################################
+# Step 3:
+# Configure system to boot to session
+#####################################
+ 
+ # Auto-Updates
+ # Auto selection session
+ # Driver repos
+ # Non-steam game shorcut written in Zentiy/something to update from BPM manually?
